@@ -8,7 +8,7 @@ import Label from "../primitives/label";
 import Link from "../primitives/link";
 import Checkbox from "../primitives/checkbox";
 
-const Login: Component = () => {
+const SignIn: Component = () => {
   return (
     <AuthLayout>
       <Title>Sign in</Title>
@@ -39,4 +39,4 @@ const Login: Component = () => {
   );
 };
 
-export default Login;
+export default SignIn;
