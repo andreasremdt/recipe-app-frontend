@@ -5,7 +5,6 @@ import cx from "../lib/classnames";
 
 interface MainLayoutProps extends JSX.HTMLAttributes<HTMLDivElement> {
   children: JSX.Element;
-  title: string;
 }
 
 const MainLayout: Component<MainLayoutProps> = (props) => {
