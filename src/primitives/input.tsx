@@ -1,6 +1,6 @@
 import type { Component, JSX } from "solid-js";
 
-import cx from "../utils/classnames";
+import cx from "../lib/classnames";
 
 const Input: Component<JSX.InputHTMLAttributes<HTMLInputElement>> = (props) => {
   const base =

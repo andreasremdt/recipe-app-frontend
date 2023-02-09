@@ -1,6 +1,6 @@
 import type { Component, JSX } from "solid-js";
 
-import cx from "../utils/classnames";
+import cx from "../lib/classnames";
 
 const Button: Component<JSX.ButtonHTMLAttributes<HTMLButtonElement>> = (props) => {
   const base =

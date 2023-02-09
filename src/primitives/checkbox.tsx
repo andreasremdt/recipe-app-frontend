@@ -1,6 +1,6 @@
 import { Component, JSX, splitProps } from "solid-js";
 
-import cx from "../utils/classnames";
+import cx from "../lib/classnames";
 
 const Checkbox: Component<JSX.InputHTMLAttributes<HTMLInputElement>> = (props) => {
   const [local, rest] = splitProps(props, ["children"]);

@@ -1,6 +1,6 @@
 import { Component, JSX, splitProps } from "solid-js";
 
-import cx from "../utils/classnames";
+import cx from "../lib/classnames";
 
 interface LabelProps extends JSX.LabelHTMLAttributes<HTMLLabelElement> {
   optional?: boolean;
