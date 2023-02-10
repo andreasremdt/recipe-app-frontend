@@ -1,52 +1,40 @@
 import { useParams } from "@solidjs/router";
-import { Component, createResource, Index, Show } from "solid-js";
-import Editor from "../components/editor";
+import { Component, createResource, Show } from "solid-js";
+import RecipeEditor from "../components/recipe-editor";
+import IngredientRenderer from "../components/ingredient-renderer";
 
 import MainLayout from "../layouts/main";
-import fetcher from "../lib/fetcher";
-import parse from "../lib/recipe-parser";
-import type { Recipe } from "../types/recipe";
-
-const fetchRecipe = async (id: string) => fetcher<Recipe>("GET", `/api/recipes/${id}`);
+import { fetch } from "../lib/recipe-fetcher";
 
 const Page: Component = () => {
   const params = useParams();
-  const [recipe, { mutate }] = createResource(params.id, fetchRecipe);
+  const [recipe, { mutate }] = createResource(params.id, fetch);
 
   return (
     <>
       <Show when={!recipe.loading} fallback={<p>Loading...</p>}>
-        <MainLayout title={recipe().title} class="flex gap-x-12">
-          <Editor recipe={recipe} onSave={mutate} />
+        <MainLayout title={recipe().title} class="flex">
+          <RecipeEditor recipe={recipe} onSave={mutate} />
 
-          <div class="w-2/3 py-8">
-            <header class="mb-3 border-b border-slate-300 pb-3">
-              <h1 class="text-3xl font-bold text-slate-900">{recipe().title}</h1>
+          <div class="w-2/3 p-8">
+            <header class="rounded-md bg-white py-12 px-4 text-center shadow-md">
+              <h1 class="mb-2 text-3xl font-bold text-slate-900">{recipe().title}</h1>
+              <Show when={recipe().description}>
+                <p>{recipe().description}</p>
+              </Show>
             </header>
 
-            <p>{recipe().description}</p>
-            <span>{recipe.loading && "Loading..."}</span>
+            <IngredientRenderer ingredients={recipe().ingredients} />
 
-            <div class="mt-8 flex gap-x-16">
-              <aside>
-                <h2 class="mb-2 text-xl font-bold text-slate-900">Ingredients</h2>
-                <ul class="list-disc pl-4">
-                  <Index each={parse(recipe().ingredients)}>
-                    {(ingredient) => <li>{ingredient()}</li>}
-                  </Index>
-                </ul>
-              </aside>
+            <section>
+              <h2 class="mb-2 text-xl font-bold text-slate-900">Instructions</h2>
 
-              <section>
-                <h2 class="mb-2 text-xl font-bold text-slate-900">Instructions</h2>
-
-                <ol class="list-decimal pl-4">
+              {/* <ol class="list-decimal pl-4">
                   <Index each={parse(recipe().instructions)}>
                     {(instruction) => <li>{instruction()}</li>}
                   </Index>
-                </ol>
-              </section>
-            </div>
+                </ol> */}
+            </section>
           </div>
         </MainLayout>
       </Show>

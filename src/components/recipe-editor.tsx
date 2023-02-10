@@ -5,16 +5,16 @@ import Input from "../primitives/input";
 import Label from "../primitives/label";
 import Textarea from "../primitives/textarea";
 import Button from "../primitives/button";
-import stringifyFormData from "../lib/stringify-form-data";
-import fetcher from "../lib/fetcher";
+import IngredientsTextarea from "./ingredients-textarea";
 import type { Recipe } from "../types/recipe";
+import { create, update } from "../lib/recipe-fetcher";
 
-interface EditorProps {
+interface RecipeEditorProps {
   recipe: Resource<Recipe>;
   onSave: Setter<Recipe>;
 }
 
-const Editor: Component<EditorProps> = (props) => {
+const RecipeEditor: Component<RecipeEditorProps> = (props) => {
   const params = useParams();
   const navigate = useNavigate();
 
@@ -25,14 +25,12 @@ const Editor: Component<EditorProps> = (props) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const formData = stringifyFormData(new FormData(event.target));
-
     if (params.id === "new") {
-      const recipe = await fetcher<Recipe>("POST", "/api/recipes", formData);
+      const created = await create(props.recipe());
 
-      navigate(`/recipes/${recipe.id}`);
+      navigate(`/recipes/${created.id}`);
     } else {
-      await fetcher<Recipe>("PATCH", `/api/recipes/${props.recipe().id}`, formData);
+      await update(props.recipe());
     }
   };
 
@@ -54,16 +52,13 @@ const Editor: Component<EditorProps> = (props) => {
         name="description"
         value={props.recipe().description}
         onInput={(event) => handleChange(event, "description")}
-        class="h-12"
+        class="h-18"
       />
 
       <Label for="ingredients">Ingredients</Label>
-      <Textarea
-        id="ingredients"
-        name="ingredients"
+      <IngredientsTextarea
         value={props.recipe().ingredients}
-        onInput={(event) => handleChange(event, "ingredients")}
-        rows={10}
+        onInput={(ingredients) => props.onSave({ ...props.recipe(), ingredients })}
       />
 
       <Label for="instructions">Instructions</Label>
@@ -72,7 +67,7 @@ const Editor: Component<EditorProps> = (props) => {
         name="instructions"
         value={props.recipe().instructions}
         onInput={(event) => handleChange(event, "instructions")}
-        rows={10}
+        class="h-32"
       />
 
       <Button type="submit">Save recipe</Button>
@@ -80,4 +75,4 @@ const Editor: Component<EditorProps> = (props) => {
   );
 };
 
-export default Editor;
+export default RecipeEditor;

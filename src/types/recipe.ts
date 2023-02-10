@@ -1,8 +1,10 @@
+import type { JSONContent } from "@tiptap/core";
+
 export interface Recipe {
   id: string;
   title: string;
   description?: string;
-  ingredients?: string;
+  ingredients?: JSONContent;
   instructions?: string;
   thumbnailUrl?: string;
 }
