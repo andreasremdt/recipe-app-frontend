@@ -3,7 +3,7 @@ import { Index, Show } from "solid-js";
 import type { JSONContent } from "@tiptap/core";
 import type { Component } from "solid-js";
 
-import parseIngredients from "../lib/recipe-parser";
+import { parseIngredients } from "../lib/parser";
 
 interface Props {
   ingredients: JSONContent;

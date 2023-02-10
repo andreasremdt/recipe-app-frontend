@@ -8,6 +8,7 @@ import Button from "../primitives/button";
 import IngredientsTextarea from "./ingredients-textarea";
 import type { Recipe } from "../types/recipe";
 import { create, update } from "../lib/recipe-fetcher";
+import InstructionsTextarea from "./instructions-textarea";
 
 interface RecipeEditorProps {
   recipe: Resource<Recipe>;
@@ -62,12 +63,9 @@ const RecipeEditor: Component<RecipeEditorProps> = (props) => {
       />
 
       <Label for="instructions">Instructions</Label>
-      <Textarea
-        id="instructions"
-        name="instructions"
+      <InstructionsTextarea
         value={props.recipe().instructions}
-        onInput={(event) => handleChange(event, "instructions")}
-        class="h-32"
+        onInput={(instructions) => props.onSave({ ...props.recipe(), instructions })}
       />
 
       <Button type="submit">Save recipe</Button>

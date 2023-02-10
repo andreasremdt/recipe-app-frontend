@@ -1,12 +1,15 @@
 import { Recipe } from "../types/recipe";
 
-export function transformPastedHTML(html: string): string {
+export function transformHeadingsTo(
+  level: "h1" | "h2" | "h3" | "h4" | "h5" | "h6",
+  html: string
+): string {
   try {
     const dom = new DOMParser().parseFromString(html, "text/html");
     const headings = dom.querySelectorAll("h1, h2, h3, h4, h5, h6");
 
     headings.forEach((heading) => {
-      const h3 = document.createElement("h3");
+      const h3 = document.createElement(level);
       h3.textContent = heading.textContent;
 
       heading.replaceWith(h3);
@@ -24,8 +27,17 @@ export function transformRecipeForUpdate(recipe: Recipe): string {
     title: recipe.title,
     description: recipe.description,
     ingredients: JSON.stringify(recipe.ingredients),
-    instructions: recipe.instructions,
+    instructions: JSON.stringify(recipe.instructions),
   };
 
   return JSON.stringify(transformed);
+}
+
+export function parseFromDatabase(value: string) {
+  try {
+    return JSON.parse(value);
+  } catch (ex) {
+    console.warn("Could not parse data from database:", ex);
+    return value;
+  }
 }

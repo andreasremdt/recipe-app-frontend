@@ -1,7 +1,10 @@
 import { generateHTML, JSONContent } from "@tiptap/core";
 import Document from "@tiptap/extension-document";
 import Paragraph from "@tiptap/extension-paragraph";
+import Underline from "@tiptap/extension-underline";
 import Heading from "@tiptap/extension-heading";
+import Italic from "@tiptap/extension-italic";
+import Bold from "@tiptap/extension-bold";
 import Text from "@tiptap/extension-text";
 
 interface Node {
@@ -24,7 +27,7 @@ function findHeading(node: JSONContent, json: JSONContent): JSONContent | null {
 }
 
 function getTextContent(node: JSONContent): string {
-  return generateHTML(node, [Document, Paragraph, Text, Heading]);
+  return generateHTML(node, [Document, Paragraph, Text, Heading, Bold, Underline, Italic]);
 }
 
 function transformNode(node: JSONContent): Node {
@@ -42,7 +45,7 @@ function hasContent(node: JSONContent): boolean {
   return getTextContent(node).trim().length > 0;
 }
 
-export default function parseIngredients(value?: JSONContent) {
+export function parseIngredients(value?: JSONContent) {
   if (!value || !value.content) {
     return [];
   }
@@ -80,4 +83,20 @@ export default function parseIngredients(value?: JSONContent) {
   }
 
   return results;
+}
+
+export function parseInstructions(value?: JSONContent) {
+  if (!value || !value.content) {
+    return [];
+  }
+
+  const sections = [];
+
+  for (const entry of value.content) {
+    if (hasContent(entry)) {
+      sections.push(transformNode(entry));
+    }
+  }
+
+  return sections;
 }

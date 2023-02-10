@@ -1,5 +1,5 @@
 import fetcher from "./fetcher";
-import { transformRecipeForUpdate } from "./utils";
+import { parseFromDatabase, transformRecipeForUpdate } from "./utils";
 import { Recipe } from "../types/recipe";
 
 interface RecipeResponse {
@@ -14,7 +14,11 @@ interface RecipeResponse {
 export async function fetch(recipeId: string): Promise<Recipe> {
   const recipe = await fetcher<RecipeResponse>("GET", `/api/recipes/${recipeId}`);
 
-  return { ...recipe, ingredients: JSON.parse(recipe.ingredients) };
+  return {
+    ...recipe,
+    ingredients: parseFromDatabase(recipe.ingredients),
+    instructions: parseFromDatabase(recipe.instructions),
+  };
 }
 
 export async function create(recipe: Recipe): Promise<Recipe> {

@@ -1,8 +1,9 @@
 import { useParams } from "@solidjs/router";
 import { Component, createResource, Show } from "solid-js";
+
 import RecipeEditor from "../components/recipe-editor";
 import IngredientRenderer from "../components/ingredient-renderer";
-
+import InstructionsRenderer from "../components/instructions-renderer";
 import MainLayout from "../layouts/main";
 import { fetch } from "../lib/recipe-fetcher";
 
@@ -26,15 +27,7 @@ const Page: Component = () => {
 
             <IngredientRenderer ingredients={recipe().ingredients} />
 
-            <section>
-              <h2 class="mb-2 text-xl font-bold text-slate-900">Instructions</h2>
-
-              {/* <ol class="list-decimal pl-4">
-                  <Index each={parse(recipe().instructions)}>
-                    {(instruction) => <li>{instruction()}</li>}
-                  </Index>
-                </ol> */}
-            </section>
+            <InstructionsRenderer instructions={recipe().instructions} />
           </div>
         </MainLayout>
       </Show>

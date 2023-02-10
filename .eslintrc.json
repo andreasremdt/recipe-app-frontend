@@ -15,5 +15,7 @@
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint", "solid"],
-  "rules": {}
+  "rules": {
+    "solid/no-innerhtml": "off"
+  }
 }

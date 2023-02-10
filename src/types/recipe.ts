@@ -5,6 +5,6 @@ export interface Recipe {
   title: string;
   description?: string;
   ingredients?: JSONContent;
-  instructions?: string;
+  instructions?: JSONContent;
   thumbnailUrl?: string;
 }
