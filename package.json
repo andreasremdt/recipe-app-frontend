@@ -40,7 +40,7 @@
     "@tiptap/extension-italic": "^2.0.0-beta.218",
     "@tiptap/extension-paragraph": "^2.0.0-beta.218",
     "@tiptap/extension-text": "^2.0.0-beta.218",
-    "@tiptap/extension-underline": "^2.0.0-beta.217",
+    "@tiptap/extension-underline": "^2.0.0-beta.218",
     "@tiptap/pm": "^2.0.0-beta.218",
     "solid-js": "^1.6.11",
     "tiptap-solid": "^0.1.8"
