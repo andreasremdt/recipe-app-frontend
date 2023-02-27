@@ -16,7 +16,7 @@
     "url": "https://andreasremdt.com"
   },
   "devDependencies": {
-    "@types/node": "^18.13.0",
+    "@types/node": "^18.14.2",
     "@typescript-eslint/eslint-plugin": "^5.53.0",
     "@typescript-eslint/parser": "^5.52.0",
     "autoprefixer": "^10.4.13",
