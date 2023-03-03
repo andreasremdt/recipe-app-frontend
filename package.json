@@ -8,7 +8,8 @@
     "format": "prettier \"src/**/*\" --write",
     "format:ci": "prettier \"src/**/*\" --check",
     "lint": "eslint \"src/**/*\"",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "test": "vitest"
   },
   "author": {
     "name": "Andreas Remdt",
@@ -16,19 +17,24 @@
     "url": "https://andreasremdt.com"
   },
   "devDependencies": {
+    "@solidjs/testing-library": "^0.6.1",
+    "@testing-library/jest-dom": "^5.16.5",
     "@types/node": "^18.13.0",
+    "@types/testing-library__jest-dom": "^5.14.5",
     "@typescript-eslint/eslint-plugin": "^5.53.0",
     "@typescript-eslint/parser": "^5.52.0",
     "autoprefixer": "^10.4.13",
     "eslint": "^8.34.0",
     "eslint-plugin-solid": "^0.9.4",
+    "jsdom": "^21.1.0",
     "postcss": "^8.4.20",
     "prettier": "^2.8.4",
     "prettier-plugin-tailwindcss": "^0.2.2",
     "tailwindcss": "^3.2.7",
     "typescript": "^4.9.4",
     "vite": "^4.1.1",
-    "vite-plugin-solid": "^2.5.0"
+    "vite-plugin-solid": "^2.5.0",
+    "vitest": "^0.29.1"
   },
   "dependencies": {
     "@solidjs/meta": "^0.28.2",
