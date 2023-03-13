@@ -24,7 +24,7 @@
     "@typescript-eslint/eslint-plugin": "^5.53.0",
     "@typescript-eslint/parser": "^5.52.0",
     "autoprefixer": "^10.4.13",
-    "eslint": "^8.34.0",
+    "eslint": "^8.36.0",
     "eslint-plugin-solid": "^0.9.4",
     "jsdom": "^21.1.0",
     "postcss": "^8.4.20",
